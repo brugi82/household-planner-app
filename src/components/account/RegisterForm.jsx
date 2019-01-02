@@ -20,7 +20,7 @@ class RegisterForm extends Component {
         }
 
         return(
-            <div className="register-form-container">
+            <div className="register-form-container" >
                 <h2>
                     Register new account
                 </h2>
@@ -41,7 +41,7 @@ class RegisterForm extends Component {
                         <TextInput placeholder="Confirm password" value=""/>
                     </Form.Item>
                     <Form.Item {...buttonItemLayout}>
-                        <Button type="primary" htmlType="submit" className="login-form-button">
+                        <Button type="primary" htmlType="submit" className="login-form-button" loading='true'>
                             Register
                         </Button>
                     </Form.Item>
@@ -50,8 +50,6 @@ class RegisterForm extends Component {
 
         );
     }
-
-    
 }
 
 export default RegisterForm;

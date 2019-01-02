@@ -1,9 +1,9 @@
 import BaseApi from './baseApi';
 
-class AccountApi extends BaseApi{
+export default class AccountApi extends BaseApi{
     static registerUser(user){
-        return postData('https://localhost:5001/accounts/RegisterUser', user)
-            .then(handleErrors);
+        return AccountApi.postData('https://localhost:5001/accounts/RegisterUser', user)
+            .then(response => AccountApi.handleErrors(response));
     }
 
     static handleErrors(response) {
