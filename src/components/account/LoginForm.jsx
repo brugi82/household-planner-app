@@ -2,6 +2,7 @@ import React, {FunctionComponent} from 'react';
 import TextInput from './../common/TextInput';
 import PasswordInput from './../common/PasswordInput';
 import {Button, Form} from 'antd';
+import {Link} from 'react-router-dom';
 
 
 const LoginForm = (props) => {
@@ -18,7 +19,7 @@ const LoginForm = (props) => {
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    Or <a href="">register now!</a>
+                    Or <Link to="/register">register now!</Link>
                 </Form.Item>
             </Form>
         </div>
