@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom';
 const LoginForm = (props) => {
     return (
         <div className="login-form-container">
+            <h2>Enter your credentials</h2>
             <Form className="login-form">
                 <Form.Item>
                     <TextInput placeholder="Username" icon="user" value=""/>

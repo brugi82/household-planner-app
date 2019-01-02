@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import Header from './components/common/Header';
-import TextInput from './components/common/TextInput';
-import PasswordInput from './components/common/PasswordInput';
-import LoginForm from './components/account/LoginForm';
-import RegisterForm from './components/account/RegisterForm';
+import RegisterPage from './components/account/RegisterPage';
+import LoginPage from './components/account/LoginPage';
 import {Route} from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -13,8 +10,8 @@ class App extends Component {
     return (
       <div className="App">
         <Header username="test@test.com" />
-        <Route exact path="/" component={LoginForm}/>
-        <Route path="/register" component={RegisterForm}/>
+        <Route exact path="/" component={LoginPage}/>
+        <Route path="/register" component={RegisterPage}/>
       </div>
     );
   }

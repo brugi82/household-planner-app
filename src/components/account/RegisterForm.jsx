@@ -20,28 +20,34 @@ class RegisterForm extends Component {
         }
 
         return(
-            <Form>
-                <Form.Item label="Email" {...formItemLayout}>
-                    <TextInput placeholder="Please enter your email address" value=""/>
-                </Form.Item>
-                <Form.Item label="First name" {...formItemLayout}>
-                    <TextInput placeholder="Your first name" value=""/>
-                </Form.Item>
-                <Form.Item label="Last name" {...formItemLayout}>
-                    <TextInput placeholder="Your last name" value=""/>
-                </Form.Item>
-                <Form.Item label="Password" {...formItemLayout}>
-                    <TextInput placeholder="Password" value=""/>
-                </Form.Item>
-                <Form.Item label="Confirm password" {...formItemLayout}>
-                    <TextInput placeholder="Confirm password" value=""/>
-                </Form.Item>
-                <Form.Item {...buttonItemLayout}>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
-                        Register
-                    </Button>
-                </Form.Item>
-            </Form>
+            <div className="register-form-container">
+                <h2>
+                    Register new account
+                </h2>
+                <Form>
+                    <Form.Item label="Email" {...formItemLayout}>
+                        <TextInput placeholder="Please enter your email address" value=""/>
+                    </Form.Item>
+                    <Form.Item label="First name" {...formItemLayout}>
+                        <TextInput placeholder="Your first name" value=""/>
+                    </Form.Item>
+                    <Form.Item label="Last name" {...formItemLayout}>
+                        <TextInput placeholder="Your last name" value=""/>
+                    </Form.Item>
+                    <Form.Item label="Password" {...formItemLayout}>
+                        <TextInput placeholder="Password" value=""/>
+                    </Form.Item>
+                    <Form.Item label="Confirm password" {...formItemLayout}>
+                        <TextInput placeholder="Confirm password" value=""/>
+                    </Form.Item>
+                    <Form.Item {...buttonItemLayout}>
+                        <Button type="primary" htmlType="submit" className="login-form-button">
+                            Register
+                        </Button>
+                    </Form.Item>
+                </Form>
+            </div>
+
         );
     }
 
