@@ -13,7 +13,11 @@ class TextInput extends Component {
         }
 
         return(
-            <Input prefix={prefix} placeholder={this.props.placeholder} />
+            <Input prefix={prefix} 
+                name={this.props.name}
+                placeholder={this.props.placeholder} 
+                value={this.props.value}
+                onChange={this.props.onChange}/>
         );
     }
 }

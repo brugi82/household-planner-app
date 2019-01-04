@@ -1,5 +1,5 @@
 export default {
-    user: {},
-    loading: false,
+    user: { username: 'u123'},
+    loading: true,
     error: ''
 }

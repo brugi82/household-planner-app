@@ -2,7 +2,7 @@ import * as actionTypes from './../actions/actionTypes';
 import initialState from './initialState';
 
 export default function accountReducer(state = initialState, action){
-    switch(action.actionType){
+    switch(action.type){
         case actionTypes.REGISTER_USER_BEGIN:
             return {
                 ...state,
