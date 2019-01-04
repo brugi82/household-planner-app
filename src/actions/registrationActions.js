@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes';
-import AccountApi from './../api/accountApi';
+import AccountApi from '../api/accountApi';
 
 export function registerUserBegin(user){
     return {type: actionTypes.REGISTER_USER_BEGIN, user}

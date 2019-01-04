@@ -23,25 +23,25 @@ class RegisterForm extends Component {
                     <Form.Item label="Email" {...formItemLayout}>
                         <TextInput placeholder="Please enter your email address" 
                             name="username"
-                            value={this.props.user.username}
+                            value={this.props.userInfo.username}
                             onChange={this.props.updateUserState}/>
                     </Form.Item>
                     <Form.Item label="First name" {...formItemLayout}>
                         <TextInput placeholder="Your first name" 
                             name="firstName"
-                            value={this.props.user.firstName}
+                            value={this.props.userInfo.firstName}
                             onChange={this.props.updateUserState}/>
                     </Form.Item>
                     <Form.Item label="Last name" {...formItemLayout}>
                         <TextInput placeholder="Your last name" 
                             name="lastName"
-                            value={this.props.user.lastName}
+                            value={this.props.userInfo.lastName}
                             onChange={this.props.updateUserState}/>
                     </Form.Item>
                     <Form.Item label="Password" {...formItemLayout}>
                         <PasswordInput placeholder="Password" 
                             name="password"
-                            value={this.props.user.password}
+                            value={this.props.userInfo.password}
                             onChange={this.props.updateUserState}/>
                     </Form.Item>
                     <Form.Item label="Confirm password" {...formItemLayout}>
@@ -49,7 +49,7 @@ class RegisterForm extends Component {
                     </Form.Item>
                     <Form.Item {...buttonItemLayout}>
                         <Button type="primary" htmlType="submit" className="login-form-button" 
-                            loading={this.props.loading}
+                            loading={this.props.processing}
                             onClick={this.props.registerUser}>
                             Register
                         </Button>

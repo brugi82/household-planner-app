@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import RegisterForm from './RegisterForm';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
-import * as accountActions from './../../actions/accountActions';
+import * as registrationActions from '../../actions/registrationActions';
 import {bindActionCreators} from 'redux';
 
 class RegisterPage extends Component{
@@ -10,8 +10,8 @@ class RegisterPage extends Component{
         super(props, context);
 
         this.state = {
-            user: Object.assign({}, props.user),
-            loading: props.loading,
+            userInfo: Object.assign({}, props.userInfo),
+            processing: props.processing,
             error: props.error
         }
 
@@ -20,24 +20,23 @@ class RegisterPage extends Component{
     }
 
     componentWillReceiveProps = (nextProps) => {
-        console.log('Nextprops loading is ' + nextProps.loading);
-        if(this.props.user.username !== nextProps.user.username){
-            this.setState({user: Object.assign({}, nextProps.user)});
+        if(this.props.userInfo.username !== nextProps.userInfo.username){
+            this.setState({user: Object.assign({}, nextProps.userInfo)});
         }
     }
 
     updateUserState = (event) => {
         const field = event.target.name;
-        let user = this.state.user;
-        user[field] = event.target.value;
+        let userInfo = this.state.userInfo;
+        userInfo[field] = event.target.value;
 
-        return this.setState({user: user});
+        return this.setState({userInfo: userInfo});
     }
 
     registerUser = (event) => {
         event.preventDefault();
 
-        this.props.actions.registerUser(this.state.user);
+        this.props.actions.registerUser(this.state.userInfo);
     }
 
     render(){
@@ -45,34 +44,29 @@ class RegisterPage extends Component{
             <RegisterForm 
                 updateUserState={this.updateUserState}
                 registerUser={this.registerUser}
-                user={this.state.user}
+                userInfo={this.state.userInfo}
                 error={this.state.error}
-                loading={this.state.loading}/>
+                processing={this.state.processing}/>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    console.log('State is ' + state);
-    let newUser = {username: '', firstName: '', lastName: '', password: ''};
-    if(state.account.user){
-        newUser = state.account.user;
+    let userInfo = {username: '', firstName: '', lastName: '', password: ''};
+    if(state.registrationRequest.userInfo){
+        userInfo = state.registrationRequest.userInfo;
     }
-    
-    //console.log('State username is ' + state.user.username);
-    console.log('State loading is ' + state.account.loading);
-    console.log('State error is ' + state.account.error);
-
+console.log('process: ' + state.registrationRequest.processing);
     return {
-        user: newUser,
-        loading: state.account.loading,
-        error: state.account.error
+        userInfo: userInfo,
+        processing: state.registrationRequest.processing,
+        error: state.registrationRequest.error
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        actions: bindActionCreators(accountActions, dispatch)
+        actions: bindActionCreators(registrationActions, dispatch)
     };
 }
 

@@ -1,7 +1,7 @@
 export default {
-    registerRequest: {
-        user: {},
-        loading: true,
+    registrationRequest: {
+        userInfo: { username: 'test999'},
+        processing: false,
         error:''
     },
     user: { username: 'u123'},
