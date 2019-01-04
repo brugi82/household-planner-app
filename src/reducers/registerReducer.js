@@ -8,7 +8,7 @@ export default function registerReducer(state = initialState.registrationRequest
             return {
                 ...state,
                 userInfo: Object.assign({}, action.userInfo),
-                loading: true,
+                processing: true,
                 error: null
             };
         case actionTypes.REGISTER_USER_SUCCESS:
@@ -16,7 +16,7 @@ export default function registerReducer(state = initialState.registrationRequest
             return {
                 ...state,
                 user: Object.assign({}, action.userInfo),
-                loading: false,
+                processing: false,
                 error: null
             };
         case actionTypes.REGISTER_USER_FAILURE:
@@ -24,7 +24,7 @@ export default function registerReducer(state = initialState.registrationRequest
             return{
                 ...state,
                 userInfo: {},
-                loading: false,
+                processing: false,
                 error: action.error
             };
         default:

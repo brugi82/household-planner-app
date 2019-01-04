@@ -14,11 +14,21 @@ export function registerUserFailure(user, error){
 }
 
 export function registerUser(user){
-    return dispatch => {
+    return function(dispatch){
         dispatch(registerUserBegin());
-        return AccountApi.registerUser(user)
-            .then(dispatch(registerUserSuccess(user)))
-            .catch(error => dispatch(registerUserFailure(user, error)));
+        return AccountApi.registerUserTest(user)
+            .then(() => {
+                console.log('Account API register user resolved OK');
+                dispatch(registerUserSuccess());
+            }).catch(err => {
+                dispatch(registerUserFailure());
+            })
     }
+    // return dispatch => {
+    //     dispatch(registerUserBegin());
+    //     return AccountApi.registerUserTest(user)
+    //         .then(dispatch(registerUserSuccess(user)))
+    //         .catch(error => dispatch(registerUserFailure(user, error)));
+    // }
 }
 

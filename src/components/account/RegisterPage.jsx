@@ -20,9 +20,13 @@ class RegisterPage extends Component{
     }
 
     componentWillReceiveProps = (nextProps) => {
+        console.log('Will receiveProps...');
         if(this.props.userInfo.username !== nextProps.userInfo.username){
-            this.setState({user: Object.assign({}, nextProps.userInfo)});
+            this.setState({userInfo: Object.assign({}, nextProps.userInfo)});
         }
+
+        console.log('Will receiveProps proc... ' + nextProps.processing);
+        this.setState({processing: nextProps.processing, error: nextProps.error});
     }
 
     updateUserState = (event) => {

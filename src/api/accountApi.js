@@ -1,16 +1,29 @@
 import BaseApi from './baseApi';
 
 export default class AccountApi extends BaseApi{
+    static registerUserTest(userInfo) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+              console.log('REGISTER USER TEST RESOLVED');
+            resolve();
+          }, 3000);
+        });
+      }
+
     static registerUser(user){
-        return AccountApi.postData('https://localhost:5001/accounts/RegisterUser', user)
-            .then(response => AccountApi.handleErrors(response));
+        return new Promise((resolve, reject) => {
+            AccountApi.postData('https://localhost:5001/accounts/RegisterUser', user)
+            .then(response =>{
+                resolve(AccountApi.handleErrors(response));
+            }).catch(err => reject(err));
+        });
     }
 
     static handleErrors(response) {
         if (!response.ok) {
             throw Error(response.statusText);
         }
-        return response;
+        return response.json();
     };
 
     static postData(url = ``, data = {}) {
@@ -27,7 +40,6 @@ export default class AccountApi extends BaseApi{
             redirect: "follow", // manual, *follow, error
             referrer: "no-referrer", // no-referrer, *client
             body: JSON.stringify(data), // body data type must match "Content-Type" header
-        })
-        .then(response => response.json()); // parses response to JSON
+        }); // parses response to JSON
     }
 }
