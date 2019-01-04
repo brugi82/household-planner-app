@@ -16,16 +16,9 @@ export function registerUserFailure(user, error){
 export function registerUser(user){
     return dispatch => {
         dispatch(registerUserBegin());
-
         return AccountApi.registerUser(user)
             .then(dispatch(registerUserSuccess(user)))
             .catch(error => dispatch(registerUserFailure(user, error)));
     }
 }
 
-function handleErrors(response) {
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
-    return response;
-  }

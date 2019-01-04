@@ -20,6 +20,7 @@ class RegisterPage extends Component{
     }
 
     componentWillReceiveProps = (nextProps) => {
+        console.log('Nextprops loading is ' + nextProps.loading);
         if(this.props.user.username !== nextProps.user.username){
             this.setState({user: Object.assign({}, nextProps.user)});
         }
@@ -51,20 +52,25 @@ class RegisterPage extends Component{
     }
 }
 
-function mapStateToProps(state, ownProps){
+const mapStateToProps = (state) => {
+    console.log('State is ' + state);
     let newUser = {username: '', firstName: '', lastName: '', password: ''};
-    if(state.user){
-        newUser = state.user;
+    if(state.account.user){
+        newUser = state.account.user;
     }
     
+    //console.log('State username is ' + state.user.username);
+    console.log('State loading is ' + state.account.loading);
+    console.log('State error is ' + state.account.error);
+
     return {
         user: newUser,
-        loading: state.loading,
-        error: state.error
+        loading: state.account.loading,
+        error: state.account.error
     }
 }
 
-function mapDispatchToProps(dispatch){
+const mapDispatchToProps = (dispatch) => {
     return{
         actions: bindActionCreators(accountActions, dispatch)
     };
