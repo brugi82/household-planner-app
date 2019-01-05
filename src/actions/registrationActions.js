@@ -16,7 +16,7 @@ export function registerUserFailure(user, error){
 export function registerUser(user){
     return function(dispatch){
         dispatch(registerUserBegin());
-        return AccountApi.registerUserTest(user)
+        return AccountApi.registerUser(user)
             .then(() => {
                 console.log('Account API register user resolved OK');
                 dispatch(registerUserSuccess());

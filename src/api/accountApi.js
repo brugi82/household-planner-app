@@ -12,7 +12,7 @@ export default class AccountApi extends BaseApi{
 
     static registerUser(user){
         return new Promise((resolve, reject) => {
-            AccountApi.postData('https://localhost:5001/accounts/RegisterUser', user)
+            AccountApi.postData('https://localhost:44315/api/accounts/RegisterUser', user)
             .then(response =>{
                 resolve(AccountApi.handleErrors(response));
             }).catch(err => reject(err));
@@ -32,14 +32,16 @@ export default class AccountApi extends BaseApi{
             method: "POST", // *GET, POST, PUT, DELETE, etc.
             mode: "cors", // no-cors, cors, *same-origin
             cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+            body: JSON.stringify(data),
             credentials: "same-origin", // include, *same-origin, omit
             headers: {
-                "Content-Type": "application/json",
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
                 // "Content-Type": "application/x-www-form-urlencoded",
             },
             redirect: "follow", // manual, *follow, error
             referrer: "no-referrer", // no-referrer, *client
-            body: JSON.stringify(data), // body data type must match "Content-Type" header
+             // body data type must match "Content-Type" header
         }); // parses response to JSON
     }
 }
