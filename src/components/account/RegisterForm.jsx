@@ -19,6 +19,8 @@ class RegisterForm extends Component {
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                console.log('This is reg user: ' + this.props.registerUser);
+                this.props.registerUser();
             }
         });
     }
@@ -26,7 +28,7 @@ class RegisterForm extends Component {
     compareToFirstPassword = (rule, value, callback) => {
         const form = this.props.form;
         if (value && value !== form.getFieldValue('password')) {
-            callback('Two passwords that you enter is inconsistent!');
+            callback('Password and Confirm password do not match!');
         } else {
             callback();
         }
@@ -42,10 +44,13 @@ class RegisterForm extends Component {
         callback();
     }
 
+    handleConfirmBlur = (e) => {
+        const value = e.target.value;
+        this.setState({ confirmDirty: this.state.confirmDirty || !!value });
+    }
+
     render() {
-        const {
-            getFieldDecorator
-        } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
 
         const formItemLayout = {
             labelCol: {
@@ -68,38 +73,64 @@ class RegisterForm extends Component {
                 <h2>
                     Register new account
                 </h2>
-                <Form>
+                <Form onSubmit={this.handleSubmit}>
                     <Form.Item label="Email" {...formItemLayout}>
-                        <TextInput placeholder="Please enter your email address" 
-                            name="username"
-                            value={this.props.userInfo.username}
-                            onChange={this.props.updateUserState}/>
+                        {getFieldDecorator('email', {
+                            rules: [{
+                            type: 'email', message: 'The input is not valid E-mail!',
+                            }, {
+                            required: true, message: 'Please input your E-mail!',
+                            }],
+                        })(
+                            <TextInput placeholder="Please enter your email address"
+                                name="username"
+                                onChange={this.props.updateUserState}/>
+                        )}
                     </Form.Item>
                     <Form.Item label="First name" {...formItemLayout}>
-                        <TextInput placeholder="Your first name" 
-                            name="firstName"
-                            value={this.props.userInfo.firstName}
-                            onChange={this.props.updateUserState}/>
+                        {getFieldDecorator('firstName', {
+                            rules: [{ required: true, message: 'Please input your nickname!' }],
+                        })(
+                            <TextInput placeholder="Your first name" 
+                                name="firstName"
+                                onChange={this.props.updateUserState}/>
+                        )}
                     </Form.Item>
                     <Form.Item label="Last name" {...formItemLayout}>
-                        <TextInput placeholder="Your last name" 
-                            name="lastName"
-                            value={this.props.userInfo.lastName}
-                            onChange={this.props.updateUserState}/>
+                        {getFieldDecorator('lastName', {})(
+                            <TextInput placeholder="Your last name" 
+                                name="lastName"
+                                onChange={this.props.updateUserState}/>
+                        )}
+
                     </Form.Item>
                     <Form.Item label="Password" {...formItemLayout}>
-                        <PasswordInput placeholder="Password" 
-                            name="password"
-                            value={this.props.userInfo.password}
-                            onChange={this.props.updateUserState}/>
+                        {getFieldDecorator('password', {
+                            rules: [{
+                            required: true, message: 'Please input your password!',
+                            }, {
+                            validator: this.validateToNextPassword,
+                            }],
+                        })(
+                            <PasswordInput placeholder="Password" 
+                                name="password"
+                                onChange={this.props.updateUserState}/>
+                        )}
                     </Form.Item>
                     <Form.Item label="Confirm password" {...formItemLayout}>
-                        <PasswordInput placeholder="Confirm password" value=""/>
+                        {getFieldDecorator('confirm', {
+                            rules: [{
+                            required: true, message: 'Please confirm your password!',
+                            }, {
+                            validator: this.compareToFirstPassword,
+                            }],
+                        })(
+                            <PasswordInput placeholder="Confirm password" onBlur={this.handleConfirmBlur}/>
+                        )}
                     </Form.Item>
                     <Form.Item {...buttonItemLayout}>
                         <Button type="primary" htmlType="submit" className="login-form-button" 
-                            loading={this.props.processing}
-                            onClick={this.props.registerUser}>
+                            loading={this.props.processing}>
                             Register
                         </Button>
                     </Form.Item>

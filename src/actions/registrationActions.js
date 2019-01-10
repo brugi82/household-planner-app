@@ -9,8 +9,8 @@ export function registerUserSuccess(user){
     return {type: actionTypes.REGISTER_USER_SUCCESS, user}
 }
 
-export function registerUserFailure(user, error){
-    return {type: actionTypes.REGISTER_USER_FAILURE, user, error}
+export function registerUserFailure(error){
+    return {type: actionTypes.REGISTER_USER_FAILURE, error}
 }
 
 export function registerUser(user){
@@ -21,7 +21,8 @@ export function registerUser(user){
                 console.log('Account API register user resolved OK');
                 dispatch(registerUserSuccess());
             }).catch(err => {
-                dispatch(registerUserFailure());
+                console.log('Action error: ' + err);
+                dispatch(registerUserFailure({message: 'Registration failed...', description: err.message}));
             })
     }
     // return dispatch => {

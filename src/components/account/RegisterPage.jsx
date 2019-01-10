@@ -4,6 +4,8 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import * as registrationActions from '../../actions/registrationActions';
 import {bindActionCreators} from 'redux';
+import FormAlert from './../common/FormAlert';
+import RegisterErrorContainer from './RegisterErrorContainer';
 
 class RegisterPage extends Component{
     constructor(props, context){
@@ -25,11 +27,13 @@ class RegisterPage extends Component{
             this.setState({userInfo: Object.assign({}, nextProps.userInfo)});
         }
 
-        console.log('Will receiveProps proc... ' + nextProps.processing);
-        this.setState({processing: nextProps.processing, error: nextProps.error});
+        this.setState({processing: nextProps.processing, error: Object.assign({}, nextProps.error)});
     }
 
     updateUserState = (event) => {
+        console.log('Event: ' + event);
+        console.log('Event target: ' + event.target);
+        console.log('Event target name: ' + event.target.name);
         const field = event.target.name;
         let userInfo = this.state.userInfo;
         userInfo[field] = event.target.value;
@@ -37,20 +41,33 @@ class RegisterPage extends Component{
         return this.setState({userInfo: userInfo});
     }
 
-    registerUser = (event) => {
-        event.preventDefault();
+    registerUser = () => {
+        console.log('Starting user registration...');
 
         this.props.actions.registerUser(this.state.userInfo);
     }
 
+    onUserRegistrated = () => {
+        console.log('User registrated succesfully...');
+
+        this.props.history.push('/')
+    }
+
     render(){
         return(
-            <RegisterForm 
-                updateUserState={this.updateUserState}
-                registerUser={this.registerUser}
-                userInfo={this.state.userInfo}
-                error={this.state.error}
-                processing={this.state.processing}/>
+            <div>
+                {this.props.error && <RegisterErrorContainer
+                                        type='error'
+                                        message={this.props.error.message}
+                                        description={this.props.error.description}/>}
+                <RegisterForm 
+                    updateUserState={this.updateUserState}
+                    registerUser={this.registerUser}
+                    userInfo={this.state.userInfo}
+                    error={this.state.error}
+                    processing={this.state.processing}/>
+            </div>
+
         )
     }
 }
@@ -60,7 +77,7 @@ const mapStateToProps = (state) => {
     if(state.registrationRequest.userInfo){
         userInfo = state.registrationRequest.userInfo;
     }
-console.log('process: ' + state.registrationRequest.processing);
+    
     return {
         userInfo: userInfo,
         processing: state.registrationRequest.processing,

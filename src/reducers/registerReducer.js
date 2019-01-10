@@ -21,11 +21,11 @@ export default function registerReducer(state = initialState.registrationRequest
             };
         case actionTypes.REGISTER_USER_FAILURE:
         console.log('REGISTER_USER_FAILURE');
+        console.log('Reducer error: ' + action.error);
             return{
                 ...state,
-                userInfo: {},
                 processing: false,
-                error: action.error
+                error: Object.assign({}, action.error)
             };
         default:
             return state;
