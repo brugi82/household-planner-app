@@ -12,7 +12,7 @@ export default class AccountApi extends BaseApi{
 
     static registerUser(user){
         return new Promise((resolve, reject) => {
-            AccountApi.postData('https://localhost:44315/api/accounts/RegisterUser', user)
+            AccountApi.postData('https://localhost:44318/api/accounts/RegisterUser', user)
             .then(response =>{
                 resolve(AccountApi.handleErrors(response));
             }).catch(err => reject(err));

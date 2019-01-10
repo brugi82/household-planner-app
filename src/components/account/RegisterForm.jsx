@@ -1,20 +1,69 @@
-import React, {Component} from 'react';
+import React, {
+    Component
+} from 'react';
 import TextInput from './../common/TextInput';
 import PasswordInput from './../common/PasswordInput';
-import {Button, Form} from 'antd';
+import {
+    Button,
+    Form
+} from 'antd';
 
 class RegisterForm extends Component {
-    render(){
+    state = {
+        confirmDirty: false,
+        valid: false
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+        this.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                console.log('Received values of form: ', values);
+            }
+        });
+    }
+
+    compareToFirstPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        if (value && value !== form.getFieldValue('password')) {
+            callback('Two passwords that you enter is inconsistent!');
+        } else {
+            callback();
+        }
+    }
+
+    validateToNextPassword = (rule, value, callback) => {
+        const form = this.props.form;
+        if (value && this.state.confirmDirty) {
+            form.validateFields(['confirm'], {
+                force: true
+            });
+        }
+        callback();
+    }
+
+    render() {
+        const {
+            getFieldDecorator
+        } = this.props.form;
+
         const formItemLayout = {
-            labelCol: {span: 8},
-            wrapperCol: {span: 8}
+            labelCol: {
+                span: 8
+            },
+            wrapperCol: {
+                span: 8
+            }
         }
 
         const buttonItemLayout = {
-            wrapperCol: {span: 8, offset: 8}
+            wrapperCol: {
+                span: 8,
+                offset: 8
+            }
         }
 
-        return(
+        return ( 
             <div className="register-form-container" >
                 <h2>
                     Register new account
@@ -56,9 +105,8 @@ class RegisterForm extends Component {
                     </Form.Item>
                 </Form>
             </div>
-
         );
     }
 }
 
-export default RegisterForm;
+export default Form.create()(RegisterForm);
