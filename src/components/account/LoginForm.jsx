@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from 'react';
+import React from 'react';
 import TextInput from './../common/TextInput';
 import PasswordInput from './../common/PasswordInput';
 import {Button, Form} from 'antd';

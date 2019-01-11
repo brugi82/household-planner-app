@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import {Input, Icon} from 'antd';
 
 class TextInput extends Component {
-    constructor(props){
-        super(props);
-    }
-
     render(){
         let prefix;
         if(this.props.icon){
@@ -13,7 +9,11 @@ class TextInput extends Component {
         }
 
         return(
-            <Input prefix={prefix} placeholder={this.props.placeholder} />
+            <Input prefix={prefix} 
+                name={this.props.name}
+                placeholder={this.props.placeholder} 
+                value={this.props.value}
+                onChange={this.props.onChange}/>
         );
     }
 }

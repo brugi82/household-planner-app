@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import {Input, Icon} from 'antd';
 
 class PasswordInput extends Component {
-    constructor(props){
-        super(props);
-    }
-
     render(){
         let prefix;
         if(this.props.icon){
@@ -13,7 +9,11 @@ class PasswordInput extends Component {
         }
 
         return(
-            <Input prefix={prefix} type="password" placeholder={this.props.placeholder} />
+            <Input prefix={prefix} type="password" 
+                name={this.props.name}
+                placeholder={this.props.placeholder} 
+                value={this.props.value}
+                onChange={this.props.onChange}/>
         );
     }
 
