@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
 import * as registrationActions from '../../actions/registrationActions';
 import {bindActionCreators} from 'redux';
-import FormAlert from './../common/FormAlert';
 import RegisterErrorContainer from './RegisterErrorContainer';
 
 class RegisterPage extends Component{
@@ -45,12 +44,6 @@ class RegisterPage extends Component{
         console.log('Starting user registration...');
 
         this.props.actions.registerUser(this.state.userInfo);
-    }
-
-    onUserRegistrated = () => {
-        console.log('User registrated succesfully...');
-
-        this.props.history.push('/')
     }
 
     render(){

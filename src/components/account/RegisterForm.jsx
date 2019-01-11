@@ -44,6 +44,24 @@ class RegisterForm extends Component {
         callback();
     }
 
+    validatePasswordComplexity = (rule, value, callback) => {
+        // Disable temporarily for ease of testing
+        //
+        // if(value){
+        //     if(value.length < 8){
+        //         callback('Password needs to be at least 8 characters long.');
+        //     }
+        //     if(/[A-Z]/.test(value) === false){
+        //         callback('Password needs to contain at least one upper case character.')
+        //     }
+        //     if(/\d/.test(value) === false){
+        //         callback('Password needs to contain at least one number character.')
+        //     }
+        // }
+
+        callback();
+    }
+
     handleConfirmBlur = (e) => {
         const value = e.target.value;
         this.setState({ confirmDirty: this.state.confirmDirty || !!value });
@@ -76,6 +94,7 @@ class RegisterForm extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Item label="Email" {...formItemLayout}>
                         {getFieldDecorator('email', {
+                            validateTrigger: 'onChange', //Antdesign has a current issue with onBlur trigger...
                             rules: [{
                             type: 'email', message: 'The input is not valid E-mail!',
                             }, {
@@ -107,9 +126,11 @@ class RegisterForm extends Component {
                     <Form.Item label="Password" {...formItemLayout}>
                         {getFieldDecorator('password', {
                             rules: [{
-                            required: true, message: 'Please input your password!',
+                                required: true, message: 'Please input your password!',
                             }, {
-                            validator: this.validateToNextPassword,
+                                validator: this.validateToNextPassword,
+                            }, {
+                                validator: this.validatePasswordComplexity
                             }],
                         })(
                             <PasswordInput placeholder="Password" 

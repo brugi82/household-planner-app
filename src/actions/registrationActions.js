@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import AccountApi from '../api/accountApi';
+import {push} from 'connected-react-router';
 
 export function registerUserBegin(user){
     return {type: actionTypes.REGISTER_USER_BEGIN, user}
@@ -20,16 +21,13 @@ export function registerUser(user){
             .then(() => {
                 console.log('Account API register user resolved OK');
                 dispatch(registerUserSuccess());
+
+                //Redirect after successful registration
+                dispatch(push('/registerconfirm'));
             }).catch(err => {
                 console.log('Action error: ' + err);
                 dispatch(registerUserFailure({message: 'Registration failed...', description: err.message}));
             })
     }
-    // return dispatch => {
-    //     dispatch(registerUserBegin());
-    //     return AccountApi.registerUserTest(user)
-    //         .then(dispatch(registerUserSuccess(user)))
-    //         .catch(error => dispatch(registerUserFailure(user, error)));
-    // }
 }
 
