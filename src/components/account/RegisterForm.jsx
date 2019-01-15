@@ -1,12 +1,7 @@
-import React, {
-    Component
-} from 'react';
+import React, {Component} from 'react';
 import TextInput from './../common/TextInput';
 import PasswordInput from './../common/PasswordInput';
-import {
-    Button,
-    Form
-} from 'antd';
+import {Button,Form} from 'antd';
 
 class RegisterForm extends Component {
     state = {
