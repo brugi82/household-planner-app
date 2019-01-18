@@ -4,7 +4,10 @@ export default {
         processing: false,
         error: null
     },
-    user: { username: 'u123'},
+    user: { 
+        processing:false,
+        error:null
+    },
     loading: true,
     error: ''
 }
