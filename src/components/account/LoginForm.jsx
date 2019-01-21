@@ -15,7 +15,8 @@ class LoginForm extends Component{
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                //TODO: Handle login submit
+                
+                this.props.loginUser();
             }
         });
     }
@@ -40,7 +41,7 @@ class LoginForm extends Component{
                         })(
                             <TextInput placeholder="Email"
                                 name="username"
-                                onChange=""
+                                onChange={this.props.updateLoginInfo}
                                 icon="user"/>//TODO: update on change handler
                         )}
                     </Form.Item>
@@ -52,12 +53,13 @@ class LoginForm extends Component{
                         })(
                             <PasswordInput placeholder="Password" 
                                 name="password"
-                                onChange=""
+                                onChange={this.props.updateLoginInfo}
                                 icon="true"/>//TODO: update on change handler
                         )}
                     </Form.Item>
                     <Form.Item>
-                        <Button type="primary" htmlType="submit" className="login-form-button">
+                        <Button type="primary" htmlType="submit" className="login-form-button"
+                            loading={this.props.loading}>
                             Log in
                         </Button>
                         Or <Link to="/register">register now!</Link>

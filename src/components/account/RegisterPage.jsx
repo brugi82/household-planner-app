@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import RegisterForm from './RegisterForm';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
-import * as registrationActions from '../../actions/registrationActions';
+import * as accountActions from '../../actions/accountActions';
 import {bindActionCreators} from 'redux';
 import RegisterErrorContainer from './RegisterErrorContainer';
 
@@ -11,9 +11,9 @@ class RegisterPage extends Component{
         super(props, context);
 
         this.state = {
-            userInfo: Object.assign({}, props.userInfo),
-            processing: props.processing,
-            error: props.error
+            userInfo: {},
+            processing: false,
+            error: null
         }
 
         this.updateUserState = this.updateUserState.bind(this);
@@ -22,11 +22,8 @@ class RegisterPage extends Component{
 
     componentWillReceiveProps = (nextProps) => {
         console.log('Will receiveProps...');
-        if(this.props.userInfo.username !== nextProps.userInfo.username){
-            this.setState({userInfo: Object.assign({}, nextProps.userInfo)});
-        }
 
-        this.setState({processing: nextProps.processing, error: Object.assign({}, nextProps.error)});
+        this.setState({processing: nextProps.processing, error: {...nextProps.error}});
     }
 
     updateUserState = (event) => {
@@ -66,21 +63,20 @@ class RegisterPage extends Component{
 }
 
 const mapStateToProps = (state) => {
-    let userInfo = {username: '', firstName: '', lastName: '', password: ''};
-    if(state.registrationRequest.userInfo){
-        userInfo = state.registrationRequest.userInfo;
+    let error = null;
+    if(state.account.error){
+        error = {...state.account.error};
     }
-    
+
     return {
-        userInfo: userInfo,
-        processing: state.registrationRequest.processing,
-        error: state.registrationRequest.error
+        processing: state.account.loading,
+        error: error
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        actions: bindActionCreators(registrationActions, dispatch)
+        actions: bindActionCreators(accountActions, dispatch)
     };
 }
 

@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
 import {connectRouter} from 'connected-react-router';
-import registrationRequest from './registerReducer';
+import account from './accountReducer';
 
 const rootReducer = history => combineReducers({
     router: connectRouter(history),
-    registrationRequest
+    account
 });
 
 export default rootReducer;
