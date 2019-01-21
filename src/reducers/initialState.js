@@ -1,7 +1,8 @@
 export default {
     account: {
         user: {},
-        error: null,
+        loginError: null,
+        registrationError: null,
         loading: false
     }
 }

@@ -8,14 +8,14 @@ export default function accountReducer(state = initialState.account, action){
             return {
                 ...state,
                 loading: true,
-                error: null
+                registrationError: null
             };
         case actionTypes.REGISTER_USER_SUCCESS:
         console.log('REGISTER_USER_SUCCESS');
             return {
                 ...state,
                 processing: false,
-                error: null
+                registrationError: null
             };
         case actionTypes.REGISTER_USER_FAILURE:
         console.log('REGISTER_USER_FAILURE');
@@ -23,13 +23,13 @@ export default function accountReducer(state = initialState.account, action){
             return{
                 ...state,
                 processing: false,
-                error: {...action.error}
+                registrationError: {...action.error}
             };
             case actionTypes.LOGIN_USER_BEGIN:
             return {
                 ...state,
                 loading: true,
-                error: null
+                loginError: null
             };
         case actionTypes.LOGIN_USER_FAILURE:
             console.log('Login fail');
@@ -37,13 +37,13 @@ export default function accountReducer(state = initialState.account, action){
             return {
                 ...state,
                 loading: false,
-                error: {...action.error}
+                loginError: {...action.error}
             }
         case actionTypes.LOGIN_USER_SUCCESS:
             return {
                 ...state,
                 loading: false,
-                error: null,
+                loginError: null,
                 user:{...action.user}
             }
         default:

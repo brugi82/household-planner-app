@@ -23,7 +23,7 @@ class RegisterPage extends Component{
     componentWillReceiveProps = (nextProps) => {
         console.log('Will receiveProps...');
 
-        this.setState({processing: nextProps.processing, error: {...nextProps.error}});
+        this.setState({processing: nextProps.processing, error: {...nextProps.registrationError}});
     }
 
     updateUserState = (event) => {
@@ -64,8 +64,8 @@ class RegisterPage extends Component{
 
 const mapStateToProps = (state) => {
     let error = null;
-    if(state.account.error){
-        error = {...state.account.error};
+    if(state.account.registrationError){
+        error = {...state.account.registrationError};
     }
 
     return {

@@ -22,7 +22,7 @@ class LoginPage extends Component {
     componentWillReceiveProps = (nextProps) => {
         
         console.log('Login page, cwr props...');
-        this.setState({loading: nextProps.loading, error:{...nextProps.error}});
+        this.setState({loading: nextProps.loading, error:{...nextProps.loginError}});
     }
 
     updateLoginInfo = (event) => {
@@ -63,8 +63,8 @@ class LoginPage extends Component {
 
 const mapStateToProps = (state) => {
     let error = null;
-    if(state.account.error){
-        error = {...state.account.error};
+    if(state.account.loginError){
+        error = {...state.account.loginError};
     }
 
     return {
