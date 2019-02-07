@@ -3,6 +3,7 @@ import Header from './components/common/Header';
 import RegisterPage from './components/account/RegisterPage';
 import LoginPage from './components/account/LoginPage';
 import RegisterConfirmPage from './components/account/RegisterConfirmPage';
+import DashboardPage from './components/dashboard/DashboardPage'
 import {Route, Switch} from 'react-router-dom';
 import './App.css';
 
@@ -15,6 +16,7 @@ class App extends Component {
           <Route exact path="/" component={LoginPage}/>
           <Route path="/register" component={RegisterPage}/>
           <Route path="/registerconfirm" component={RegisterConfirmPage}/>
+          <Route path="/dashboard" component={DashboardPage}/>
         </Switch>
       </div>
     );

@@ -1,10 +1,8 @@
 export default {
-    registrationRequest: {
-        userInfo: { },
-        processing: false,
-        error: null
-    },
-    user: { username: 'u123'},
-    loading: true,
-    error: ''
+    account: {
+        user: {},
+        loginError: null,
+        registrationError: null,
+        loading: false
+    }
 }
