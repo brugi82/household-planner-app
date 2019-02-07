@@ -2,6 +2,14 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 class DashboardPage extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            user: {}
+        }
+    }
+
     render () {
         return(
             <div>
@@ -15,7 +23,7 @@ class DashboardPage extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user,
+        user: state.account.user,
     }
 }
 
