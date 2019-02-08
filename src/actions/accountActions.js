@@ -26,6 +26,18 @@ export const loginUserFailure = (error) => {
     return {type:actionTypes.LOGIN_USER_FAILURE, error};
 } 
 
+export const confirmEmailBegin = () => {
+    return { type:actionTypes.CONFIRM_EMAIL_BEGIN };
+}
+
+export const confirmEmailSuccess = (confirmed) => {
+    return { type:actionTypes.CONFIRM_EMAIL_SUCCESS, confirmed: confirmed };
+}
+
+export const confirmEmailFailure = (error) => {
+    return { type:actionTypes.CONFIRM_EMAIL_FAILURE, error };
+}
+
 export const loginUser = (loginInfo) => {
     return (dispatch) => {
         dispatch(loginUserBegin());
@@ -42,7 +54,7 @@ export const loginUser = (loginInfo) => {
 }
 
 export function registerUser(user){
-    return function(dispatch){
+    return function(dispatch) {
         dispatch(registerUserBegin());
         return AccountApi.registerUser(user)
             .then(() => {
@@ -54,6 +66,21 @@ export function registerUser(user){
             }).catch(err => {
                 console.log('Action error: ' + err);
                 dispatch(registerUserFailure({message: 'Registration failed...', description: err.message}));
+            })
+    }
+}
+
+export const confirmEmail = (userId, token) => {
+    return (dispatch) => {
+        console.log('Confirm email start.');
+        dispatch(confirmEmailBegin());
+        return AccountApi.confirmEmail(userId, token)
+            .then((confirmed) => {
+                console.log('Confirm email OK.');
+                dispatch(confirmEmailSuccess(confirmed));
+            }).catch((error) => {
+                console.log('Confirm email Failed.');
+                dispatch(confirmEmailFailure(error));
             })
     }
 }

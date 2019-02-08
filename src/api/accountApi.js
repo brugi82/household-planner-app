@@ -25,13 +25,25 @@ export default class AccountApi extends BaseApi{
             AccountApi.postData('https://localhost:44318/api/accounts/RegisterUser', user)
             .then(response =>{
                 AccountApi.handleErrors(response);
-                resolve();
+                resolve(true);
             }).catch(err => reject(err));
+        });
+    }
+
+    static confirmEmail = (userId, token) => {
+        return new Promise((resolve, reject) => {
+            AccountApi.postData(`https://localhost:44318/api/accounts/ConfirmEmail?i=${userId}&o=${token}`)
+                .then(response => {
+                    AccountApi.handleErrors(response);
+                    resolve(true);
+                }).catch(error => reject(error));
         });
     }
 
     static handleErrors(response) {
         if (!response.ok) {
+            // console.log(response);
+            // console.log(response.error);
             throw Error(response.statusText);
         }
         return response;

@@ -4,22 +4,18 @@ import initialState from './initialState';
 export default function accountReducer(state = initialState.account, action){
     switch(action.type){
         case actionTypes.REGISTER_USER_BEGIN:
-        console.log('REGISTER_USER_BEGIN');
             return {
                 ...state,
                 loading: true,
                 registrationError: null
             };
         case actionTypes.REGISTER_USER_SUCCESS:
-        console.log('REGISTER_USER_SUCCESS');
             return {
                 ...state,
                 processing: false,
                 registrationError: null
             };
         case actionTypes.REGISTER_USER_FAILURE:
-        console.log('REGISTER_USER_FAILURE');
-        console.log('Reducer error: ' + action.error);
             return{
                 ...state,
                 processing: false,
@@ -32,8 +28,6 @@ export default function accountReducer(state = initialState.account, action){
                 loginError: null
             };
         case actionTypes.LOGIN_USER_FAILURE:
-            console.log('Login fail');
-            console.log('Error:', action.error);
             return {
                 ...state,
                 loading: false,
@@ -46,6 +40,33 @@ export default function accountReducer(state = initialState.account, action){
                 loginError: null,
                 user:{...action.user}
             }
+        case actionTypes.CONFIRM_EMAIL_BEGIN:
+            return {
+                ...state,
+                confirmEmail: {
+                    confirmed: false,
+                    error: null,
+                    loading: true
+                }
+            };
+        case actionTypes.CONFIRM_EMAIL_FAILURE:
+            return {
+                ...state,
+                confirmEmail: {
+                    confirmed: false,
+                    error: action.error,
+                    loading: false
+                }
+            };
+        case actionTypes.CONFIRM_EMAIL_SUCCESS:
+            return {
+                ...state,
+                confirmEmail: {
+                    confirmed: action.confirmed,
+                    error: null,
+                    loading: false
+                }
+            };
         default:
             return state;
     }
